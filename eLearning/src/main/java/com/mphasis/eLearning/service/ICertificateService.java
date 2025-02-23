@@ -1,9 +1,13 @@
 package com.mphasis.eLearning.service;
 
-import com.mphasis.eLearning.entity.Certificate;
+import com.mphasis.eLearning.entity.Certificates;
 
 public interface ICertificateService {
-	public Certificate addCertificate(Certificate certificate);
-	//public Certificate getCertificate(int employeeId);
+	
+
+	public byte[] generateCertificate(String userName,String courseName);
+
+
+	
 
 }

@@ -3,7 +3,9 @@ package com.mphasis.eLearning.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +57,29 @@ public class ReportsController {
 					
 		}
 	}
+	
+	@GetMapping("reportsforemployee/{employeeId}")
+	public ResponseEntity<?> getReportsForEmployee(@PathVariable int employeeId){
+		List<Reports> reports=reportsService.getreportsForEmployee(employeeId);
+		if(!reports.isEmpty()) {
+			return new ResponseEntity<>(reports,HttpStatusCode.valueOf(200));
+		}else {
+			return new ResponseEntity<>("No reports Found",HttpStatusCode.valueOf(400));
+		}
+	}
+	
+	@GetMapping("/getreportsbyinstructorid/{instructorid}")
+	public ResponseEntity<?> getReportsByInstructorId(@PathVariable("instructorid") int instructorId){
+		List<Reports> reportsList=reportsService.getReportsByInstructorId(instructorId);
+		if(reportsList!=null)
+			return new ResponseEntity<>(reportsList,HttpStatus.OK);
+		else
+			return new ResponseEntity<>("No reports found with given InstructorId ",HttpStatus.NOT_FOUND);
+			
+		
+	}
+	
+	
 	
 
 }

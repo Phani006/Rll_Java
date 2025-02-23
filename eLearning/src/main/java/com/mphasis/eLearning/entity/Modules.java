@@ -1,4 +1,5 @@
 package com.mphasis.eLearning.entity;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,9 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Modules {
@@ -21,11 +24,15 @@ public class Modules {
 	
 	private String moduleName;
 	
+	@Size(max=10)
 	private String moduleContent;
 	
 	private String materialType;
 	
 	private String materialName;
+	
+	@Lob
+	private byte[] filedata;
 	
 //	private byte[] file;
 	
@@ -99,6 +106,14 @@ public class Modules {
 		return courseRef;
 	}
 
+	public byte[] getFiledata() {
+		return filedata;
+	}
+
+	public void setFiledata(byte[] filedata) {
+		this.filedata = filedata;
+	}
+
 	public void setCourseRef(Course courseRef) {
 		this.courseRef = courseRef;
 	}
@@ -132,14 +147,16 @@ public class Modules {
 	@Override
 	public String toString() {
 		return "Modules [moduleId=" + moduleId + ", moduleName=" + moduleName + ", moduleContent=" + moduleContent
-				+ ", materialType=" + materialType + ", materialName=" + materialName + ", courseRef=" + courseRef + ", quizRef=" + quizRef + ", vedioRef=" + vedioRef
-				+ "]";
+				+ ", materialType=" + materialType + ", materialName=" + materialName + ", filedata="
+				+ Arrays.toString(filedata) + ", courseRef=" + courseRef + ", quizRef=" + quizRef + ", vedioRef="
+				+ vedioRef + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + Arrays.hashCode(filedata);
 		result = prime * result + Objects.hash(courseRef, materialName, materialType, moduleContent, moduleId,
 				moduleName, quizRef, vedioRef);
 		return result;
@@ -154,7 +171,7 @@ public class Modules {
 		if (getClass() != obj.getClass())
 			return false;
 		Modules other = (Modules) obj;
-		return Objects.equals(courseRef, other.courseRef) 
+		return Objects.equals(courseRef, other.courseRef) && Arrays.equals(filedata, other.filedata)
 				&& Objects.equals(materialName, other.materialName) && Objects.equals(materialType, other.materialType)
 				&& Objects.equals(moduleContent, other.moduleContent) && moduleId == other.moduleId
 				&& Objects.equals(moduleName, other.moduleName) && Objects.equals(quizRef, other.quizRef)

@@ -22,6 +22,7 @@ public class Enrollment {
 	private Employee employeeRef;
 	
 	private LocalDate date;
+	
 	public int getEnrollmentId() {
 		return enrollmentId;
 	}

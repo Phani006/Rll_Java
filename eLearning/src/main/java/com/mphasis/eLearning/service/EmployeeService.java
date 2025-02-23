@@ -64,4 +64,10 @@ public class EmployeeService implements IEmployeeService{
 		return employee;
 	}
 
+	@Override
+	public Employee updateEmployeById(int employeeId) {
+		
+		return null;
+	}
+
 }

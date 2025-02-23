@@ -18,4 +18,13 @@ public class UserService implements IUserService {
 		return user;
 	}
 
+	@Override
+	public User getUserById(int userId) {
+		User user=null;
+		if(userRepository.existsById(userId)){
+			user=userRepository.findById(userId).get(); 
+		}
+		return user;
+	}
+
 }

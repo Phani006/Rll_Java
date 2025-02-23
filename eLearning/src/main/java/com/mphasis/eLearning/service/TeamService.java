@@ -1,10 +1,12 @@
 package com.mphasis.eLearning.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mphasis.eLearning.entity.Employee;
 import com.mphasis.eLearning.entity.Manager;
 import com.mphasis.eLearning.entity.Team;
 import com.mphasis.eLearning.repository.ManagerRepository;
@@ -40,8 +42,15 @@ private ManagerRepository managerRepository;
 	@Override
 	public Team addTeam(Team team) {
 		Manager manager = team.getManagerRef();  
+		List<Employee> employee=team.getEmployeeList();
 		manager = entityManager.merge(manager);
 		team.setManagerRef(manager);
+		List<Employee> managedEmployees = new ArrayList<>();
+		    for (Employee emp : employee) {
+		        Employee managedEmp = entityManager.merge(emp);
+		        managedEmployees.add(managedEmp);
+		    }
+		    team.setEmployeeList(managedEmployees);
 		Team t=teamrepository.save(team);
 		return t;
 	}

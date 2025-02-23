@@ -30,5 +30,15 @@ public class UserController {
 			return new ResponseEntity<>(user,HttpStatus.NO_CONTENT);
 		}
 	}
+	
+	@GetMapping("userbyid/{userId}")
+	public ResponseEntity<?> getUserByid(@PathVariable int userId){
+		User user=userService.getUserById(userId);
+		if(user!=null) {
+			return new ResponseEntity<User>(user,HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("not found",HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

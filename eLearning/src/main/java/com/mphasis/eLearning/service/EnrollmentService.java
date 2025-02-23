@@ -11,6 +11,7 @@ import com.mphasis.eLearning.repository.EnrollmentRepository;
 public class EnrollmentService implements IEnrollmentService {
 	@Autowired
 	private EnrollmentRepository enrollmentRepository;
+	
 	@Override
 	public Enrollment addEnrollment(Enrollment enrollment) {
 

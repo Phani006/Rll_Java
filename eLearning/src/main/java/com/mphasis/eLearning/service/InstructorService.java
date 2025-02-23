@@ -52,6 +52,13 @@ public class InstructorService implements IInstructorService{
 		return instructor;
 	}
 
+	@Override
+	public Instructor getInstructorByUserId(int userId) {
+		Instructor  instructor=instructorRepository.getInstructorByUserId(userId);
+		return instructor;
+
+	}
+
 	
 
 }

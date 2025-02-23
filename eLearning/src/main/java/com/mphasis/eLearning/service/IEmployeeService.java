@@ -13,5 +13,6 @@ import com.mphasis.eLearning.entity.Employee;
 		public Employee getEmployeeById(int EmployeeId);
 		public List<Employee> getAllEmployeesByTeam(int TeamId);
 		public Employee getEmployeeByUser(int userId);
+		public Employee updateEmployeById(int employeeId);
 		
 }

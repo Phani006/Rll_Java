@@ -11,5 +11,6 @@ public interface IInstructorService {
 	 public Instructor updateInstructor(Instructor instrutor);
 	 public Instructor deleteInstructor(int InstructorID);
 	 public Instructor getInstructorById(int InstructorId);
+	 public Instructor getInstructorByUserId(int userId);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mphasis.eLearning.entity.Assign;
 import com.mphasis.eLearning.service.IAssignService;
+import com.mphasis.eLearning.service.IEnrollmentService;
 
 @CrossOrigin("*")
 @RestController
@@ -22,6 +24,9 @@ import com.mphasis.eLearning.service.IAssignService;
 public class AssignController {
 	@Autowired
 	private IAssignService iassignService;
+	
+	@Autowired
+	private IEnrollmentService enrollmentService;
 
 	@PostMapping("addassign")
 	public ResponseEntity<?> addAssign(@RequestBody Assign assign){
@@ -55,9 +60,10 @@ public class AssignController {
 		return new ResponseEntity<>(true,HttpStatus.ACCEPTED);
 		}
 		else {
-			return new ResponseEntity<>(false,HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-
+	
+	
 }

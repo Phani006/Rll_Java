@@ -50,4 +50,15 @@ public class InstructorController {
 		Instructor instructor=instructorservice.getInstructorById(instructorId);
 		return new ResponseEntity<Instructor>(instructor,HttpStatus.OK);
 	}
+	
+	@GetMapping("/getinstructorbyiduserId/{userid}")
+	public ResponseEntity<?> getInstructorByUserId(@PathVariable("userid") int userId){
+		Instructor i=instructorservice.getInstructorByUserId(userId);
+		if(i!=null) {
+			return new ResponseEntity<Instructor>(i,HttpStatus.ACCEPTED);
+		}
+		else {
+			return new ResponseEntity<String>("data is not present",HttpStatus.NOT_FOUND);
+		}
+	}
 }

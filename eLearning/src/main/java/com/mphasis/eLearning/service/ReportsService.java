@@ -31,6 +31,18 @@ public class ReportsService implements IReportsService{
 		List<Reports> r=reportsRepository.getReportByManager(managerId);
 		return r;
 	}
+
+	@Override
+	public List<Reports> getreportsForEmployee(int employeeId) {
+		List<Reports> reportsList=reportsRepository.getReportsForEmployee(employeeId);
+		return reportsList;
+	}
+
+	@Override
+	public List<Reports> getReportsByInstructorId(int instructorId) {
+			List<Reports> reportsList=reportsRepository.getReportsByInstructorId(instructorId);
+			return reportsList;
+	}
 	
 	
 

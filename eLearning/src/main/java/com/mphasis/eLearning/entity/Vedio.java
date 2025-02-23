@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 @Entity
 public class Vedio {
@@ -22,7 +23,8 @@ public class Vedio {
 	
 	private String contentName;
 	
-	//private byte[] vedioData;
+	@Lob
+	private byte[] vedioData;
 	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -30,6 +32,18 @@ public class Vedio {
 	
 	
 	
+	public byte[] getVedioData() {
+		return vedioData;
+	}
+
+
+
+	public void setVedioData(byte[] vedioData) {
+		this.vedioData = vedioData;
+	}
+
+
+
 	public Vedio() {}
 
 
@@ -122,7 +136,7 @@ public class Vedio {
 	@Override
 	public String toString() {
 		return "Vedio [vedioId=" + vedioId + ", vedioName=" + vedioName + ", contentType=" + contentType
-				+ ", contentName=" + contentName + ", vedioData="  + ", moduleRef="
+				+ ", contentName=" + contentName + ", vedioData=" + Arrays.toString(vedioData) + ", moduleRef="
 				+ moduleRef + "]";
 	}
 
@@ -132,7 +146,7 @@ public class Vedio {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		//result = prime * result + Arrays.hashCode(vedioData);
+		result = prime * result + Arrays.hashCode(vedioData);
 		result = prime * result + Objects.hash(contentName, contentType, moduleRef, vedioId, vedioName);
 		return result;
 	}
@@ -149,7 +163,7 @@ public class Vedio {
 			return false;
 		Vedio other = (Vedio) obj;
 		return Objects.equals(contentName, other.contentName) && Objects.equals(contentType, other.contentType)
-				&& Objects.equals(moduleRef, other.moduleRef) 
+				&& Objects.equals(moduleRef, other.moduleRef) && Arrays.equals(vedioData, other.vedioData)
 				&& vedioId == other.vedioId && Objects.equals(vedioName, other.vedioName);
 	};
 	
